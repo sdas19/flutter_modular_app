@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular_app/presentation/navigation/navigation.dart';
-import 'package:example_login/example_login.dart';
+import 'package:login_manager/login_manager_type.dart';
+import 'package:product_launcher/product_launcher.dart';
+import 'package:product_launcher/product_launcher_impl.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  final ProductLauncher productLauncher = ProductLauncherImpl();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String _login() {
-    return LoginManager.instance
+    return productLauncher.getLoginManager(LoginManagerType.TYPE_FIREBASE)
         .login(_emailTextController.text, _passwordTextController.text);
   }
 }

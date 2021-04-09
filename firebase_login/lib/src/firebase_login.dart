@@ -1,7 +1,7 @@
-class LoginManager {
-  LoginManager._();
+class FirebaseLoginManager {
+  FirebaseLoginManager._();
 
-  static final LoginManager instance = LoginManager._();
+  static final FirebaseLoginManager instance = FirebaseLoginManager._();
 
   String login(String username, String password) => "Firebased $username";
 }

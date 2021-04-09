@@ -1,4 +1,4 @@
-name: example_login
+name: firebase_login
 description: Firebase Login System
 
 version: 1.0.0+1
@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
