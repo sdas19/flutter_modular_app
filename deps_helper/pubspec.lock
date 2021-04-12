@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  deps_helper:
-    dependency: "direct main"
-    description:
-      path: "../deps_helper"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   fake_async:
     dependency: transitive
     description:
@@ -57,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  firebase_login:
-    dependency: "direct main"
-    description:
-      path: "../firebase_login"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -75,19 +61,12 @@ packages:
     source: sdk
     version: "0.0.0"
   get_it:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get_it
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.0"
-  login_manager:
-    dependency: "direct main"
-    description:
-      path: "../login_manager"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   matcher:
     dependency: transitive
     description:
@@ -109,13 +88,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  server_login:
-    dependency: "direct main"
-    description:
-      path: "../server_login"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   sky_engine:
     dependency: transitive
     description: flutter

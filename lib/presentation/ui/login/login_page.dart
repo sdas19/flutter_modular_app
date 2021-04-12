@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular_app/presentation/navigation/navigation.dart';
-import 'package:login_manager/login_manager_type.dart';
 import 'package:product_launcher/product_launcher.dart';
 import 'package:product_launcher/product_launcher_impl.dart';
 
@@ -58,8 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         "GO TO HOME",
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () =>
-                          navigateToHome(context, _login()),
+                      onPressed: () => navigateToHome(context, _login()),
                     ),
                   ),
                 ),
@@ -72,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String _login() {
-    return productLauncher.getLoginManager(LoginManagerType.TYPE_FIREBASE)
+    return productLauncher
+        .getLoginManager()
         .login(_emailTextController.text, _passwordTextController.text);
   }
 }
