@@ -12,10 +12,12 @@ class LoginManagerImplDepsResolver implements DependencyResolver {
 
   static final LoginManagerImplDepsResolver instance =
       LoginManagerImplDepsResolver._();
+  static final scopeName = 'LoginScope';
 
   @override
   registerFeature(CoreComponent coreComponent) {
-    GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
+  GetIt.instance.pushNewScope(scopeName: scopeName);
+  GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
         () => coreComponent.prefs);
     GetIt.instance
         .registerLazySingleton<Future<Database>>(() => coreComponent.db);

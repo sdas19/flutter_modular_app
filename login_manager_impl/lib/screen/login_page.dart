@@ -4,6 +4,10 @@ import 'package:get_it/get_it.dart';
 import 'package:navigation/route_names.dart';
 
 class LoginPage extends StatefulWidget {
+  final Function onPop;
+
+  LoginPage({this.onPop});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -14,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(child: Scaffold(
       appBar: AppBar(
         title: Text("Login Page"),
       ),
@@ -70,7 +74,10 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    );
+    ), onWillPop: (){
+      widget.onPop.call();
+      return Future<bool>.value(true);
+    });
   }
 
   void _login({String email, String password}) {

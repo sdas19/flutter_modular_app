@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  final Function onPop;
+
+  HomePage({this.onPop});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -24,29 +27,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context).settings.arguments as String;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome $args"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+    return WillPopScope(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Welcome $args"),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.display1,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      onWillPop: () {
+        widget.onPop.call();
+        return Future<bool>.value(true);
+      },
     );
   }
 }

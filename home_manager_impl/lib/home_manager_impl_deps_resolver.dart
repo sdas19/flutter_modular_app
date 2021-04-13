@@ -9,14 +9,16 @@ class HomeManagerImplDepsResolver implements DependencyResolver {
   HomeManagerImplDepsResolver._();
 
   static final HomeManagerImplDepsResolver instance =
-  HomeManagerImplDepsResolver._();
+      HomeManagerImplDepsResolver._();
+  static final scopeName = 'HomeScope';
 
   @override
   registerFeature(CoreComponent coreComponent) {
-    /*GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
-            () => coreComponent.prefs);
+    GetIt.instance.pushNewScope(scopeName: scopeName);
+    GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
+        () => coreComponent.prefs);
     GetIt.instance
         .registerLazySingleton<Future<Database>>(() => coreComponent.db);
-    GetIt.instance.registerLazySingleton<Dio>(() => coreComponent.dio);*/
+    GetIt.instance.registerLazySingleton<Dio>(() => coreComponent.dio);
   }
 }
