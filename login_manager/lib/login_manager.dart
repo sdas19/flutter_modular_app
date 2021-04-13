@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
 abstract class LoginManager {
-  String login(String username, String password);
+  Widget getLoginPage();
+  void destroyLoginScope();
 }

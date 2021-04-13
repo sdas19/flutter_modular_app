@@ -1,3 +1,5 @@
+import 'package:core/core_component.dart';
+
 abstract class DependencyResolver {
-  registerProduct();
+  registerFeature(CoreComponent coreComponent);
 }

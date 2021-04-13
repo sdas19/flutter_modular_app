@@ -27,7 +27,9 @@ dependencies:
 
   login_manager_impl:
     path: ../login_manager_impl
-
+  core:
+    path: ../core
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -26,6 +26,8 @@ dependencies:
 
 
   get_it: ^6.0.0
+  core:
+    path: ../core
 
 
 dev_dependencies:
