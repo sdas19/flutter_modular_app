@@ -26,6 +26,8 @@ dependencies:
 
   product_launcher:
     path: ./product_launcher
+  navigation:
+    path: ./navigation
 
 dev_dependencies:
   flutter_test:

@@ -35,6 +35,8 @@ dependencies:
     path: ../deps_helper
   core:
     path: ../core
+  navigation:
+    path: ../navigation
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:firebase_login/firebase_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:navigation/route_names.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -50,14 +51,17 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     width: double.infinity,
                     child: RaisedButton(
-                        color: Theme
-                            .of(context)
-                            .primaryColor,
-                        child: Text(
-                          "GO TO HOME",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () => () {},
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
+                      child: Text(
+                        "GO TO HOME",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        _login(email: _emailTextController.text,
+                            password: _passwordTextController.text);
+                      },
                     ),
                   ),
                 ),
@@ -69,8 +73,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  String _login() {
-    return GetIt.instance.get<FirebaseLoginManager>().login(
-        _emailTextController.text, _passwordTextController.text);
+  void _login({String email, String password}) {
+    String result = GetIt.instance.get<FirebaseLoginManager>().login(
+        email, password);
+    Navigator.pushNamed(context, HOME_ROUTE, arguments: result);
   }
 }

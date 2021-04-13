@@ -18,6 +18,6 @@ class HomeManagerImpl implements HomeManager {
 
   @override
   Widget getHomePage() {
-    return HomePage(title: 'Will be replaced with result from Login');
+    return HomePage();
   }
 }

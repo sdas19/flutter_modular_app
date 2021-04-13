@@ -27,6 +27,8 @@ dependencies:
 
   login_manager_impl:
     path: ../login_manager_impl
+  home_manager_impl:
+    path: ../home_manager_impl
   core:
     path: ../core
     

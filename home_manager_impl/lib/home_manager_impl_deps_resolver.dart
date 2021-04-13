@@ -13,10 +13,10 @@ class HomeManagerImplDepsResolver implements DependencyResolver {
 
   @override
   registerFeature(CoreComponent coreComponent) {
-    GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
+    /*GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
             () => coreComponent.prefs);
     GetIt.instance
         .registerLazySingleton<Future<Database>>(() => coreComponent.db);
-    GetIt.instance.registerLazySingleton<Dio>(() => coreComponent.dio);
+    GetIt.instance.registerLazySingleton<Dio>(() => coreComponent.dio);*/
   }
 }

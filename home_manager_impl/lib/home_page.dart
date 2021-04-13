@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -11,6 +8,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
+  var args = '';
 
   void _incrementCounter() {
     setState(() {
@@ -19,10 +17,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context).settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome ${widget.title}"),
+        title: Text("Welcome $args"),
       ),
       body: Center(
         child: Column(
