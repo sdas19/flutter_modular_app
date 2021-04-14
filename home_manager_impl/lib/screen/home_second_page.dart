@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_manager_impl/home_manager_impl_deps_resolver.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:get_it/get_it.dart';
+import 'package:persistence_component/persistence_component.dart';
 
 class HomeSecondPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class HomeSecondPage extends StatelessWidget {
         color: Colors.blueAccent,
         child: Center(
           child: Text(
-              "Database hashcode -> ${HomeManagerImplDepsResolver.homeGetIt.get<Future<Database>>().hashCode.toString()}"),
+              "Database hashcode -> ${GetIt.instance.get<LocalPersistenceComponent>().db.hashCode.toString()}"),
         ),
       ),
     );

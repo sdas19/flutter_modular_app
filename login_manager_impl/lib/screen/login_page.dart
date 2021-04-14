@@ -2,14 +2,17 @@ import 'package:firebase_login/firebase_login.dart';
 import 'package:flutter/material.dart';
 import 'package:app_structure/product_structure.dart';
 import 'package:app_structure/feature_structure.dart';
-import 'package:login_manager_impl/login_manager_impl_deps_resolver.dart';
 import 'package:navigation/navigation.dart';
 import 'package:navigation/route_names.dart';
+import 'package:persistence_component/persistence_component.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_it/get_it.dart';
 
 class LoginPage extends StatefulWidget {
   final Function onPop;
+  final dynamic args;
 
-  LoginPage({this.onPop});
+  LoginPage({this.onPop, this.args});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -21,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("Login Page"),
       ),
@@ -78,16 +81,14 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    ), onWillPop: (){
-      widget.onPop.call();
-      return Future<bool>.value(true);
-    });
+    );
   }
 
   void _login({String email, String password}) {
-    String result = LoginManagerImplDepsResolver.loginGetIt.get<FirebaseLoginManager>().login(
+    Future<SharedPreferences> sharedPref = GetIt.instance.get<SharedPrefComponent>().prefs;
+    String result = GetIt.instance.get<FirebaseLoginManager>().login(
         email, password);
-    Feature homeScreen = LoginManagerImplDepsResolver.loginGetIt.get<FeatureProvider>().provideFeature(HOME);
-    pushRoute(context: context, destRoute: homeScreen.initialScreen);
+    Feature homeScreen = GetIt.instance.get<FeatureProvider>().provideFeature(HOME);
+    pushRoute(context: context, destRoute: homeScreen.initialScreen(args: result));
   }
 }

@@ -31,8 +31,6 @@ dependencies:
     path: ../firebase_login
   server_login:
     path: ../server_login
-  deps_helper:
-    path: ../deps_helper
   navigation:
     path: ../navigation
   persistence_component:

@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get_it: ^6.1.1
 
 dev_dependencies:
   flutter_test:

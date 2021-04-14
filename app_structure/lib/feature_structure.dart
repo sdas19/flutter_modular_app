@@ -3,6 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 abstract class Feature {
   String name;
-  Widget initialScreen;
+  Widget initialScreen({dynamic args});
   List<DeeplinkModel> deeplinks;
 }

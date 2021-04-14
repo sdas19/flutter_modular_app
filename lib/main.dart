@@ -22,10 +22,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        navigatorKey: productLauncher.getNavigationService().getNavigatorKey(),
         home: productLauncher
             .getFeatureProvider()
             .provideFeature(LOGIN)
-            .initialScreen);
+            .initialScreen());
   }
 }
