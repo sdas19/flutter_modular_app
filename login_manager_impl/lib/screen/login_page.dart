@@ -1,8 +1,9 @@
 import 'package:firebase_login/firebase_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:login_manager_impl/login_manager_impl_deps_resolver.dart';
 import 'package:navigation/route_names.dart';
-import 'package:navigation/navigation.dart';
+import 'package:navigation/navigation_service.dart';
 
 class LoginPage extends StatefulWidget {
   final Function onPop;
@@ -67,18 +68,6 @@ class _LoginPageState extends State<LoginPage> {
                           _login(email: _emailTextController.text,
                               password: _passwordTextController.text);
                         },
-                      ),
-                      RaisedButton(
-                        color: Theme
-                            .of(context)
-                            .primaryColor,
-                        child: Text(
-                          "BACK",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          popCurrentRoute(context);
-                        },
                       )
                     ],
                   ),
@@ -95,8 +84,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login({String email, String password}) {
-    String result = GetIt.instance.get<FirebaseLoginManager>().login(
+    String result = LoginManagerImplDepsResolver.getIt.get<FirebaseLoginManager>().login(
         email, password);
-    Navigator.pushNamed(context, HOME_ROUTE, arguments: result);
+    GetIt.instance.get<NavigationService>().navigateTo(HOME_ROUTE, args: result);
   }
 }

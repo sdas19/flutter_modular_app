@@ -11,18 +11,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: INITIAL_ROUTE,
-      routes: {
-        // When navigating to the "/" route, build the LoginPage widget along with its dependencies lazily.
-        INITIAL_ROUTE: (context) =>
-            productLauncher.getLoginManager().getLoginFeatureGateway(),
-        // When navigating to the "/home" route, build the HomePage widget along with its dependencies lazily.
-        HOME_ROUTE: (context) => productLauncher.getHomeManager().getHomeFeatureGateway(),
-      },
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        navigatorKey: productLauncher.getNavigationService().getNavigatorKey(),
+        onGenerateRoute: (routeSettings) {
+          switch (routeSettings.name) {
+            case HOME_ROUTE:
+              return MaterialPageRoute(
+                  builder: (context) =>
+                      productLauncher.getHomeManager().getHomeFeatureGateway());
+            default:
+              return MaterialPageRoute(
+                  builder: (context) => productLauncher
+                      .getLoginManager()
+                      .getLoginFeatureGateway());
+          }
+        },
+        home: productLauncher.getLoginManager().getLoginFeatureGateway());
   }
 }

@@ -1,6 +1,7 @@
 import 'package:home_manager/home_manager.dart';
 import 'package:login_manager/login_manager.dart';
 import 'package:login_manager_impl/login_manager_impl.dart';
+import 'package:navigation/navigation_service.dart';
 import 'package:persistence_component_impl/local_persistence_impl.dart';
 import 'package:persistence_component_impl/sharedpref_impl.dart';
 import 'package:product_launcher/product_launcher.dart';
@@ -21,25 +22,31 @@ class ProductLauncherImpl implements ProductLauncher {
   @override
   LoginManager getLoginManager() {
     if (loginManager == null) {
-      loginManager = LoginManagerImpl(
-          sharedPrefComponent: GetIt.instance.get<SharedPrefComponent>(),
-          networkComponent: GetIt.instance.get<NetworkComponent>());
+      loginManager = LoginManagerImpl();
     }
-    return loginManager;
+    return loginManager
+      ..registerDependencies(
+          sharedPrefComponent: GetIt.instance.get<SharedPrefComponent>(),
+          networkComponent: GetIt.instance.get<NetworkComponent>(),
+          navigationService: getNavigationService());
   }
 
   @override
   HomeManager getHomeManager() {
     if (homeManager == null) {
-      homeManager = HomeManagerImpl(
+      homeManager = HomeManagerImpl();
+    }
+    return homeManager
+      ..registerDependencies(
         localPersistenceComponent:
             GetIt.instance.get<LocalPersistenceComponent>(),
+        navigationService: getNavigationService(),
       );
-    }
-    return homeManager;
   }
 
   void registerProductDependencies() {
+    GetIt.instance
+        .registerLazySingleton<NavigationService>(() => NavigationService());
     GetIt.instance
         .registerLazySingleton<NetworkComponent>(() => NetworkComponentImpl());
     GetIt.instance.registerLazySingleton<SharedPrefComponent>(
@@ -47,4 +54,8 @@ class ProductLauncherImpl implements ProductLauncher {
     GetIt.instance.registerLazySingleton<LocalPersistenceComponent>(
         () => LocalPersistenceComponentImpl());
   }
+
+  @override
+  NavigationService getNavigationService() =>
+      GetIt.instance.get<NavigationService>();
 }

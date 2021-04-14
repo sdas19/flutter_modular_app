@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:firebase_login/firebase_login.dart';
+import 'package:navigation/navigation_service.dart';
 import 'package:network_component/network_component.dart';
 import 'package:persistence_component/persistence_component.dart';
 import 'package:server_login/server_login.dart';
@@ -8,32 +9,40 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 class LoginManagerImplDepsResolver
-    implements SharedPreferenceDependencyResolver, NetworkDependencyResolver {
+    implements
+        SharedPreferenceDependencyResolver,
+        NetworkDependencyResolver,
+        NavigationDependencyResolver {
   LoginManagerImplDepsResolver._();
 
   static final LoginManagerImplDepsResolver instance =
       LoginManagerImplDepsResolver._();
-  static final scopeName = 'LoginScope';
+  static final getIt = GetIt.asNewInstance();
 
-  pushLoginScope() {
-    GetIt.instance.pushNewScope(scopeName: scopeName);
+  @override
+  registerNavigationService(NavigationService navigationService) {
+    getIt.registerLazySingleton<NavigationService>(() => navigationService);
   }
 
   @override
   registerSharedPrefComponent(SharedPrefComponent sharedPrefComponent) {
-    GetIt.instance.registerLazySingleton<Future<SharedPreferences>>(
+    getIt.registerLazySingleton<Future<SharedPreferences>>(
         () => sharedPrefComponent.prefs);
   }
 
   @override
   registerNetworkComponent(NetworkComponent networkComponent) {
-    GetIt.instance.registerLazySingleton<Dio>(() => networkComponent.dio);
+    getIt.registerLazySingleton<Dio>(() => networkComponent.dio);
   }
 
   registerFeatureDependencies() {
-    GetIt.instance.registerLazySingleton<FirebaseLoginManager>(
+    getIt.registerLazySingleton<FirebaseLoginManager>(
         () => FirebaseLoginManager.instance);
-    GetIt.instance.registerLazySingleton<ServerLoginManager>(
+    getIt.registerLazySingleton<ServerLoginManager>(
         () => ServerLoginManager.instance);
+  }
+
+  clearDependencyGraph() {
+    getIt.reset();
   }
 }

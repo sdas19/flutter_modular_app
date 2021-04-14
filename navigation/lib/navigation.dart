@@ -9,7 +9,5 @@ void pushRoute(
 void popCurrentRoute(BuildContext context) {
   if (Navigator.of(context).canPop()) {
     Navigator.of(context).pop();
-  } else {
-
   }
 }

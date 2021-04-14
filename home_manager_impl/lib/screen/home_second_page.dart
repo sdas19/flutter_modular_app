@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_manager_impl/home_manager_impl_deps_resolver.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeSecondPage extends StatelessWidget {
   @override
@@ -9,6 +12,10 @@ class HomeSecondPage extends StatelessWidget {
       ),
       body: Container(
         color: Colors.blueAccent,
+        child: Center(
+          child: Text(
+              "Database hashcode -> ${HomeManagerImplDepsResolver.getIt.get<Future<Database>>().hashCode.toString()}"),
+        ),
       ),
     );
   }

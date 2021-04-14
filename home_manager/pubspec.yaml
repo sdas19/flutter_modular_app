@@ -24,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  persistence_component:
+    path: ../persistence_component
+  navigation:
+    path: ../navigation
 
 dev_dependencies:
   flutter_test:
