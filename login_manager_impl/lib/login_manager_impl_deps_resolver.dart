@@ -1,3 +1,4 @@
+import 'package:app_structure/product_structure.dart';
 import 'package:get_it/get_it.dart';
 import 'package:firebase_login/firebase_login.dart';
 import 'package:navigation/navigation_service.dart';
@@ -12,37 +13,43 @@ class LoginManagerImplDepsResolver
     implements
         SharedPreferenceDependencyResolver,
         NetworkDependencyResolver,
-        NavigationDependencyResolver {
+        NavigationDependencyResolver,
+        FeatureProviderDependencyResolver {
   LoginManagerImplDepsResolver._();
 
   static final LoginManagerImplDepsResolver instance =
       LoginManagerImplDepsResolver._();
-  static final getIt = GetIt.asNewInstance();
+  static final loginGetIt = GetIt.I<GetIt>(instanceName:'LoginGetIt');
 
   @override
   registerNavigationService(NavigationService navigationService) {
-    getIt.registerLazySingleton<NavigationService>(() => navigationService);
+    loginGetIt.registerLazySingleton<NavigationService>(() => navigationService);
   }
 
   @override
   registerSharedPrefComponent(SharedPrefComponent sharedPrefComponent) {
-    getIt.registerLazySingleton<Future<SharedPreferences>>(
+    loginGetIt.registerLazySingleton<Future<SharedPreferences>>(
         () => sharedPrefComponent.prefs);
   }
 
   @override
   registerNetworkComponent(NetworkComponent networkComponent) {
-    getIt.registerLazySingleton<Dio>(() => networkComponent.dio);
+    loginGetIt.registerLazySingleton<Dio>(() => networkComponent.dio);
+  }
+
+  @override
+  registerFeatureProvider(FeatureProvider featureProvider) {
+    loginGetIt.registerLazySingleton<FeatureProvider>(() => featureProvider);
   }
 
   registerFeatureDependencies() {
-    getIt.registerLazySingleton<FirebaseLoginManager>(
+    loginGetIt.registerLazySingleton<FirebaseLoginManager>(
         () => FirebaseLoginManager.instance);
-    getIt.registerLazySingleton<ServerLoginManager>(
+    loginGetIt.registerLazySingleton<ServerLoginManager>(
         () => ServerLoginManager.instance);
   }
 
   clearDependencyGraph() {
-    getIt.reset();
+    loginGetIt.reset();
   }
 }

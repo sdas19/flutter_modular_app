@@ -1,3 +1,5 @@
+import 'package:app_structure/feature_structure.dart';
+import 'package:app_structure/product_structure.dart';
 import 'package:home_manager/home_manager.dart';
 import 'package:login_manager/login_manager.dart';
 import 'package:login_manager_impl/login_manager_impl.dart';
@@ -11,51 +13,72 @@ import 'package:network_component/network_component.dart';
 import 'package:persistence_component/persistence_component.dart';
 import 'package:network_component_impl/network_component_impl.dart';
 
+import 'feature_provider_impl.dart';
+
 class ProductLauncherImpl implements ProductLauncher {
-  HomeManager homeManager;
-  LoginManager loginManager;
+  static HomeManager homeManager;
+  static LoginManager loginManager;
+  static GetIt productGetItInstance = GetIt.instance;
 
   ProductLauncherImpl() {
     registerProductDependencies();
   }
 
-  @override
-  LoginManager getLoginManager() {
+  addFeatures() async {
+    productGetItInstance.registerSingleton(GetIt.asNewInstance(), instanceName: 'LoginGetIt');
+    productGetItInstance.registerSingleton(GetIt.asNewInstance(), instanceName: 'HomeGetIt');
+    getFeatureProvider().addFeature(_getLoginManager());
+    getFeatureProvider().addFeature(_getHomeManager());
+  }
+
+  LoginManager _getLoginManager() {
     if (loginManager == null) {
       loginManager = LoginManagerImpl();
     }
     return loginManager
       ..registerDependencies(
-          sharedPrefComponent: GetIt.instance.get<SharedPrefComponent>(),
-          networkComponent: GetIt.instance.get<NetworkComponent>(),
-          navigationService: getNavigationService());
+        sharedPrefComponent: productGetItInstance.get<SharedPrefComponent>(),
+        networkComponent: productGetItInstance.get<NetworkComponent>(),
+        navigationService: getNavigationService(),
+        featureProvider: productGetItInstance.get<FeatureProvider>(),
+      );
   }
 
-  @override
-  HomeManager getHomeManager() {
+  HomeManager _getHomeManager() {
     if (homeManager == null) {
       homeManager = HomeManagerImpl();
     }
     return homeManager
       ..registerDependencies(
         localPersistenceComponent:
-            GetIt.instance.get<LocalPersistenceComponent>(),
+            productGetItInstance.get<LocalPersistenceComponent>(),
         navigationService: getNavigationService(),
+        featureProvider: productGetItInstance.get<FeatureProvider>(),
       );
   }
 
   void registerProductDependencies() {
-    GetIt.instance
+    productGetItInstance
         .registerLazySingleton<NavigationService>(() => NavigationService());
-    GetIt.instance
+    productGetItInstance.registerLazySingleton<FeatureProvider>(
+        () => FeatureProviderImpl(featureList: []));
+    productGetItInstance
         .registerLazySingleton<NetworkComponent>(() => NetworkComponentImpl());
-    GetIt.instance.registerLazySingleton<SharedPrefComponent>(
+    productGetItInstance.registerLazySingleton<SharedPrefComponent>(
         () => SharedPreferenceComponentImpl());
-    GetIt.instance.registerLazySingleton<LocalPersistenceComponent>(
+    productGetItInstance.registerLazySingleton<LocalPersistenceComponent>(
         () => LocalPersistenceComponentImpl());
   }
 
   @override
   NavigationService getNavigationService() =>
-      GetIt.instance.get<NavigationService>();
+      productGetItInstance.get<NavigationService>();
+
+  @override
+  String name = 'GoPay';
+
+  @override
+  FeatureProvider getFeatureProvider() {
+    return productGetItInstance.get<FeatureProvider>();
+  }
 }

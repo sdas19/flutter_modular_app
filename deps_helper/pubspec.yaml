@@ -32,6 +32,8 @@ dependencies:
     path: ../network_component
   navigation:
     path: ../navigation
+  app_structure:
+    path: ../app_structure
 
 
 dev_dependencies:

@@ -3,10 +3,17 @@ import 'package:product_launcher/product_launcher.dart';
 import 'package:product_launcher/product_launcher_impl.dart';
 import 'package:navigation/route_names.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final productLauncher = ProductLauncherImpl();
+  await productLauncher.addFeatures();
+  runApp(MyApp(productLauncher));
+}
 
 class MyApp extends StatelessWidget {
-  final ProductLauncher productLauncher = ProductLauncherImpl();
+  final ProductLauncher productLauncher;
+
+  MyApp(this.productLauncher);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +23,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         navigatorKey: productLauncher.getNavigationService().getNavigatorKey(),
-        onGenerateRoute: (routeSettings) {
-          switch (routeSettings.name) {
-            case HOME_ROUTE:
-              return MaterialPageRoute(
-                  builder: (context) =>
-                      productLauncher.getHomeManager().getHomeFeatureGateway());
-            default:
-              return MaterialPageRoute(
-                  builder: (context) => productLauncher
-                      .getLoginManager()
-                      .getLoginFeatureGateway());
-          }
-        },
-        home: productLauncher.getLoginManager().getLoginFeatureGateway());
+        home: productLauncher
+            .getFeatureProvider()
+            .provideFeature(LOGIN)
+            .initialScreen);
   }
 }

@@ -1,9 +1,10 @@
 import 'package:firebase_login/firebase_login.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:app_structure/product_structure.dart';
+import 'package:app_structure/feature_structure.dart';
 import 'package:login_manager_impl/login_manager_impl_deps_resolver.dart';
+import 'package:navigation/navigation.dart';
 import 'package:navigation/route_names.dart';
-import 'package:navigation/navigation_service.dart';
 
 class LoginPage extends StatefulWidget {
   final Function onPop;
@@ -84,8 +85,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login({String email, String password}) {
-    String result = LoginManagerImplDepsResolver.getIt.get<FirebaseLoginManager>().login(
+    String result = LoginManagerImplDepsResolver.loginGetIt.get<FirebaseLoginManager>().login(
         email, password);
-    GetIt.instance.get<NavigationService>().navigateTo(HOME_ROUTE, args: result);
+    Feature homeScreen = LoginManagerImplDepsResolver.loginGetIt.get<FeatureProvider>().provideFeature(HOME);
+    pushRoute(context: context, destRoute: homeScreen.initialScreen);
   }
 }

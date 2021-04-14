@@ -1,4 +1,4 @@
-
+import 'package:app_structure/product_structure.dart';
 import 'package:navigation/navigation_service.dart';
 import 'package:network_component/network_component.dart';
 import 'package:persistence_component/persistence_component.dart';
@@ -17,4 +17,8 @@ abstract class NetworkDependencyResolver {
 
 abstract class NavigationDependencyResolver {
   registerNavigationService(NavigationService navigationService);
+}
+
+abstract class FeatureProviderDependencyResolver {
+  registerFeatureProvider(FeatureProvider featureProvider);
 }

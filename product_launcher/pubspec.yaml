@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  app_structure:
+    path: ../app_structure
   deps_helper:
     path: ../deps_helper
   login_manager_impl:
