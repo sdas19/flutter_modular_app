@@ -17,13 +17,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: INITIAL_ROUTE,
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        INITIAL_ROUTE: (context) => productLauncher.getLoginManager().getLoginPage(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
-        HOME_ROUTE: (context) => productLauncher.getHomeManager().getHomePage(),
+        // When navigating to the "/" route, build the LoginPage widget along with its dependencies lazily.
+        INITIAL_ROUTE: (context) =>
+            productLauncher.getLoginManager().getLoginFeatureGateway(),
+        // When navigating to the "/home" route, build the HomePage widget along with its dependencies lazily.
+        HOME_ROUTE: (context) => productLauncher.getHomeManager().getHomeFeatureGateway(),
       },
     );
   }
 }
-
-

@@ -2,6 +2,7 @@ import 'package:firebase_login/firebase_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:navigation/route_names.dart';
+import 'package:navigation/navigation.dart';
 
 class LoginPage extends StatefulWidget {
   final Function onPop;
@@ -52,21 +53,34 @@ class _LoginPageState extends State<LoginPage> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: SafeArea(
-                  child: Container(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
-                      child: Text(
-                        "GO TO HOME",
-                        style: TextStyle(color: Colors.white),
+                  child: Column(
+                    children: [
+                      RaisedButton(
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
+                        child: Text(
+                          "GO TO HOME",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          _login(email: _emailTextController.text,
+                              password: _passwordTextController.text);
+                        },
                       ),
-                      onPressed: () {
-                        _login(email: _emailTextController.text,
-                            password: _passwordTextController.text);
-                      },
-                    ),
+                      RaisedButton(
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
+                        child: Text(
+                          "BACK",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          popCurrentRoute(context);
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),

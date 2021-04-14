@@ -25,9 +25,11 @@ dependencies:
     sdk: flutter
 
 
-  get_it: ^6.0.0
-  core:
-    path: ../core
+  get_it: "6.1.0"
+  persistence_component:
+    path: ../persistence_component
+  network_component:
+    path: ../network_component
 
 
 dev_dependencies:

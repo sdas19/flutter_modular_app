@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class HomeManager {
-  Widget getHomePage();
+  Widget getHomeFeatureGateway();
   void destroyHomeScope();
 }

@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  core:
-    dependency: "direct main"
-    description:
-      path: "../core"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   deps_helper:
     dependency: "direct main"
     description:
@@ -94,7 +87,7 @@ packages:
       name: get_it
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.0"
+    version: "6.1.0"
   http_parser:
     dependency: transitive
     description:
@@ -130,6 +123,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  network_component:
+    dependency: "direct main"
+    description:
+      path: "../network_component"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   path:
     dependency: transitive
     description:
@@ -137,6 +137,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  persistence_component:
+    dependency: "direct main"
+    description:
+      path: "../persistence_component"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   server_login:
     dependency: "direct main"
     description:
