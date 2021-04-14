@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:app_structure/feature_structure.dart';
 
-abstract class HomeManager {
-  Widget getHomePage();
-  void destroyHomeScope();
+abstract class HomeManager extends Feature {
 }

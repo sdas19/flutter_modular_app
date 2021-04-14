@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:home_manager/home_manager.dart';
-import 'package:core/core_component.dart';
-import 'package:home_manager_impl/home_manager_impl_deps_resolver.dart';
-import 'package:home_manager_impl/home_page.dart';
+import 'package:home_manager_impl/screen/home_page.dart';
+import 'package:navigation/route_names.dart';
+import 'package:app_structure/deeplink_model.dart';
 
 class HomeManagerImpl implements HomeManager {
-  final CoreComponent coreComponent;
-
-  HomeManagerImpl({this.coreComponent}) {
-    HomeManagerImplDepsResolver.instance.registerFeature(coreComponent);
-  }
 
   @override
-  void destroyHomeScope() {
-    // TODO: implement destroyLoginScope
-  }
+  List<DeeplinkModel> deeplinks = [
+    DeeplinkModel(deeplink: 'gopay://home', screen: HomePage())
+  ];
 
   @override
-  Widget getHomePage() {
-    return HomePage(title: 'Will be replaced with result from Login');
-  }
+  Widget initialScreen({dynamic args}) => HomePage(args: args);
+
+  @override
+  String name = HOME;
 }

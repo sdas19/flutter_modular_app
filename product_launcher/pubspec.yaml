@@ -24,11 +24,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  app_structure:
+    path: ../app_structure
   login_manager_impl:
     path: ../login_manager_impl
-  core:
-    path: ../core
+  home_manager_impl:
+    path: ../home_manager_impl
+  network_component_impl:
+    path: ../network_component_impl
+  persistence_component_impl:
+    path: ../persistence_component_impl
     
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,3 @@
-import 'package:login_manager/login_manager.dart';
+import 'package:app_structure/product_structure.dart';
 
-abstract class ProductLauncher {
-  LoginManager getLoginManager();
-}
+abstract class ProductLauncher extends App {}

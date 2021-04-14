@@ -25,12 +25,12 @@ dependencies:
     sdk: flutter
 
 
-  deps_helper:
-    path: ../deps_helper
-  core:
-    path: ../core
   home_manager:
     path: ../home_manager
+  persistence_component:
+    path: ../persistence_component
+  navigation:
+    path: ../navigation
 
 dev_dependencies:
   flutter_test:

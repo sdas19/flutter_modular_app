@@ -31,10 +31,12 @@ dependencies:
     path: ../firebase_login
   server_login:
     path: ../server_login
-  deps_helper:
-    path: ../deps_helper
-  core:
-    path: ../core
+  navigation:
+    path: ../navigation
+  persistence_component:
+    path: ../persistence_component
+  network_component:
+    path: ../network_component
 
 dev_dependencies:
   flutter_test:

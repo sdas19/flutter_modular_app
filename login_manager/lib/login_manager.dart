@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:app_structure/feature_structure.dart';
 
-abstract class LoginManager {
-  Widget getLoginPage();
-  void destroyLoginScope();
+abstract class LoginManager extends Feature {
 }
